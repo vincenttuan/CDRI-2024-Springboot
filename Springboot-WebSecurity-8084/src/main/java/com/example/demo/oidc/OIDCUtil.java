@@ -38,15 +38,15 @@ import com.nimbusds.jwt.proc.DefaultJWTProcessor;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//用戶端編號: 385177156642-2udpabjmik0s6a0v63gf0n9mengi2vnh.apps.googleusercontent.com
-//用戶端密鑰: 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
+//用戶端編號: 
+//用戶端密鑰: 
 //回調的 URI: https://localhost:8443/callback/google
 //google 網頁應用程式 的用戶端 ID
 //https://console.cloud.google.com/apis/credentials/oauthclient/
 
 public class OIDCUtil {
-	private static final String CLIENT_ID = "385177156642-2udpabjmik0s6a0v63gf0n9mengi2vnh.apps.googleusercontent.com"; // 用戶端編號
-	private static final String CLIENT_SECRET = "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"; // 用戶端密鑰
+	private static final String CLIENT_ID = ""; // 用戶端編號
+	private static final String CLIENT_SECRET = ""; // 用戶端密鑰
 	private static final String REDIRECT_URI = "https://localhost:8443/callback/google"; // 回調的 URI
 	
 	/**
