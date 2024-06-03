@@ -1,0 +1,39 @@
+1.
+OIDC Google OAuth 2.0 設定資料
+Callback URL: https://10.100.53.58:8443/callback/google
+Callback URL: https://localhost:8443/callback/google
+Client ID: xxxxx
+Client Secret: xxxxx
+
+--------------------------------------------------------
+Google OAuth 申請流程
+1.https://console.cloud.google.com/apis/credentials
+2.選擇一個專案, 若無則建立一個專案
+3.點選左側 Menu > API > 憑證
+4.點選上方 +建立憑證 > OAuth 用戶端 ID
+5.應用程式類型 > 網頁應用程式
+6.已授權的重新導向 URI > + 新增 URI > "https://localhost:8443/callback/google"
+7.按下"建立"
+8.複製 用戶端編號(Client ID)
+  複製 用戶端密鑰(Client Secret)
+
+2.
+oidc.OIDCUtil.java 配置上方資料
+
+3.
+撰寫 callback.GoogleCallback.java
+
+4.
+撰寫 oidc.GoogleLogin.java
+
+5.
+設定 login.jsp 
+<a href="/oidc/google/login">使用 Google 登入 (OIDC)</a><p />
+
+6.
+啟動 Springboot-WebSecurity-8084
+
+7.
+瀏覽器網址
+https://10.100.53.58:8443/form_auth/report
+

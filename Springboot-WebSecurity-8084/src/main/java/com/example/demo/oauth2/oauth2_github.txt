@@ -1,0 +1,39 @@
+1.
+Github OAuth 2.0 設定資料
+Callback URL: https://10.100.53.58:8443/callback/github
+Callback URL: https://localhost:8443/callback/github
+Client ID: xxxxx
+Client secret: xxxxx
+
+--------------------------------------------------------
+Github OAuth 申請流程
+1.https://github.com/settings/profile
+2.點選左側 Developer Settings
+3.點選 OAuth Apps
+4.點選 New OAuth App
+5.Application name = xxx
+  Homepage URL = https://localhost:8443/
+  Authorization callback URL = https://localhost:8443/callback/github
+6.按下 Register application
+7.得到 Client ID 與 Client secret
+
+2.
+oauth2.OAuth2Util.java 配置上方資料
+
+3.
+撰寫 callback.GithubCallback.java
+
+4.
+撰寫 oauth2.GithubLogin.java
+
+5.
+設定 login.jsp 
+<a href="/oauth2/github/login">使用 Github 登入 (OAuth2)</a><p />
+
+6.
+啟動 Springboot-WebSecurity-8084
+
+7.
+瀏覽器網址
+https://10.100.53.58:8443/form_auth/report
+

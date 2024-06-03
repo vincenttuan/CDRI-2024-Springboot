@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="icon" href="data:;base64,iVBORw0KGgo="> <!-- Empty favicon -->
+		<meta charset="UTF-8">
+		<title>Cart</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" />
+		<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="./css/cart.css" />
+		<script src="./js/cart.js"></script>
+	</head>
+	<body style="padding: 20px">
+		
+		<h1 id="username"></h1>
+		
+		<div id="logout" class="pure-button" style="margin-bottom: 10px">登出</div>
+		
+		<table>
+			<tr>
+				<td valign="top">
+					<!-- Container for products-list -->
+                	<div id="products-container"></div>
+				</td>
+				<td valign="top" rowspan="2">
+					<!-- Container for orders-list -->
+					<div id="orders-container"></div>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">
+					<!-- Container for customers-list -->
+                	<div id="customers-container"></div>
+				</td>
+			</tr>
+		</table>
+		
+	</body>
+</html>
