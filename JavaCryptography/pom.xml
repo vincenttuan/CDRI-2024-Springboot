@@ -7,6 +7,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.5</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/net.glxn/qrgen -->
 		<dependency>
 		    <groupId>net.glxn</groupId>
