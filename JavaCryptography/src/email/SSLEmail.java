@@ -27,7 +27,7 @@ public class SSLEmail {
 	 */
 	public static void main(String[] args) {
 		final String fromEmail = "xxx@gmail.com"; //requires valid gmail id
-		final String password = "ovva jhpt cvyp cxwd"; // 應用程式密碼
+		final String password = "xxx"; // 應用程式密碼
 		final String toEmail = "xxx@yahoo.com.tw"; // can be any email id 
 		
 		System.out.println("SSLEmail Start");
