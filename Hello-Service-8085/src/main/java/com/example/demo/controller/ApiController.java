@@ -22,4 +22,11 @@ public class ApiController {
 		return "DOWN";
 	}
 	
+	@GetMapping("/up")
+	public String up() {
+		InstanceInfo instanceInfo = eurekaClient.getApplicationInfoManager().getInfo();
+		instanceInfo.setStatus(InstanceInfo.InstanceStatus.UP);
+		return "UP";
+	}
+	
 }
