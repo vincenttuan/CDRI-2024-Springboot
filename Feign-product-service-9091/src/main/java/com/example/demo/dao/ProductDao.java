@@ -43,6 +43,33 @@ public class ProductDao {
 		return product;
 	}
 	
+	// 商品修改
+	public Product update(Product product) {
+		for(Product p : products) {
+			if(p.getId().equals(product.getId())) {
+				p.setName(product.getName());
+				p.setPrice(product.getPrice());
+				p.setCost(product.getCost());
+				p.setQuantity(product.getQuantity());
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	// 庫存置換
+	public Boolean replaceQuantity(Integer id, Integer quantity) {
+		for(Product p : products) {
+			if(p.getId().equals(id)) {
+				p.setQuantity(quantity);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	// 庫存調整
+	
 }
 
 
