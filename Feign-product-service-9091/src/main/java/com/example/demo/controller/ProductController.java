@@ -25,6 +25,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	// 查詢全部
 	@GetMapping // 使用根路徑
 	public ResponseEntity<ApiResponse<List<Product>>> findAll() {
 		List<Product> products = productService.findAll();
@@ -37,6 +38,7 @@ public class ProductController {
 		return ResponseEntity.ok(apiResponse);
 	}
 	
+	// 查詢單筆
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<Product>> findById(@PathVariable Integer id) {
 		Optional<Product> productOpt = productService.findById(id);
@@ -49,6 +51,7 @@ public class ProductController {
 		return ResponseEntity.ok(apiResponse);
 	}
 	
+	// 新增商品
 	@PostMapping // 使用根路徑
 	public ResponseEntity<ApiResponse<Product>> save(@RequestBody Product product) {
 		Product savedProduct = productService.save(product);
@@ -56,7 +59,8 @@ public class ProductController {
 		return ResponseEntity.ok(apiResponse);
 	}
 	
-	@PutMapping("/{id}") // 修改商品
+	// 修改商品
+	@PutMapping("/{id}") 
 	public ResponseEntity<ApiResponse<Product>> update(@PathVariable Integer id, @RequestBody Product product) {
 		Product updatedProduct = productService.update(id, product);
 		ApiResponse<Product> apiResponse = null;
@@ -82,7 +86,7 @@ public class ProductController {
 		return ResponseEntity.ok(apiResponse);
 	}
 	
-	// 調整庫存
+	// GET 調整庫存
 	@GetMapping("/{id}/stock/{amount}")
 	public ResponseEntity<ApiResponse<Product>> adjustStock(@PathVariable("id") Integer id, @PathVariable("amount") Integer amount) {
 		Boolean status = productService.adjustStock(id, amount);
