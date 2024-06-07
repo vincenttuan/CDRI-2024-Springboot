@@ -4,8 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +38,15 @@ public class DataController {
 	public ResponseEntity<ApiResponse<Integer>> lotto() {
 		Integer data = new Random().nextInt(100);
 		ApiResponse<Integer> apiResponse = new ApiResponse<>(true, "成功", data);
+		return ResponseEntity.ok(apiResponse);
+	}
+	
+	// 取得token
+	@CrossOrigin(origins = "http://localhost:8082")
+	@GetMapping("/token")
+	public ResponseEntity<ApiResponse<String>> token() {
+		String token = UUID.randomUUID().toString();
+		ApiResponse<String> apiResponse = new ApiResponse<>(true, "成功", token);
 		return ResponseEntity.ok(apiResponse);
 	}
 	
