@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fetch JSON Example</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fetch JSON Example</title>
 </head>
 <body>
-  <script>
-    fetch('http://localhost:8081/data/token')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-      })
-      .then(data => {
-    	console.log(JSON.stringify(data)); // Handle the JSON data
-    	alert(JSON.stringify(data));
-      })
-      .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-      });
+	<div id="data"></div>
+	<script>
+		fetch('http://localhost:8081/data/token', {
+	    	method: 'GET',
+	    	credentials: 'include' // 攜帶 cookies
+	    })
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok ' + response.statusText);
+			}
+			return response.json();
+		})
+		.then(data => {
+	    	console.log(JSON.stringify(data)); // Handle the JSON data
+	    	document.getElementById('data').innerText = JSON.stringify(data);
+		})
+		.catch(error => {
+			console.error('There has been a problem with your fetch operation:', error);
+		});
   </script>
 </body>
 </html>

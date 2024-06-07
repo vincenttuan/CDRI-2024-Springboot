@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.dto.BmiDto;
 import com.example.demo.model.po.Ship;
 import com.example.demo.model.response.ApiResponse;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController // CSR
 @RequestMapping("/data")
@@ -42,13 +45,15 @@ public class DataController {
 	}
 	
 	// 取得token
-	@CrossOrigin(origins = "http://localhost:8082")
-	@GetMapping("/token")
-	public ResponseEntity<ApiResponse<String>> token() {
-		String token = UUID.randomUUID().toString();
-		ApiResponse<String> apiResponse = new ApiResponse<>(true, "成功", token);
-		return ResponseEntity.ok(apiResponse);
-	}
+	@CrossOrigin(origins = "http://localhost:8082", allowCredentials = "true")
+    @GetMapping("/token")
+    public ResponseEntity<ApiResponse<Map<String, String>>> token(HttpSession session) {
+        String token = UUID.randomUUID().toString();
+        String sessionId = session.getId();
+        
+        ApiResponse<Map<String, String>> apiResponse = new ApiResponse<>(true, "成功", Map.of("token", token, "sessionId", sessionId));
+        return ResponseEntity.ok(apiResponse);
+    }
 	
 	// 取得船隻資料
 	@GetMapping("/ship")
