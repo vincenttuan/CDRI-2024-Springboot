@@ -69,6 +69,20 @@ public class ProductDao {
 	}
 	
 	// 庫存調整
+	public Boolean adjustQuantity(Integer id, int amount) {
+		for(Product p : products) {
+			if(p.getId().equals(id)) {
+				// 調整後數量
+				int lastQuantity = p.getQuantity() + amount;
+				if(lastQuantity < 0) {
+					return false;
+				}
+				p.setQuantity(lastQuantity);
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }
 
