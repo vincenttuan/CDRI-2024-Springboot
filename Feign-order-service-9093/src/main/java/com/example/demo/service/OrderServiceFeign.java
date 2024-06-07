@@ -35,6 +35,11 @@ public class OrderServiceFeign {
 		Customer customer = customerClient.getCustomerById(order.getCustomerId()).getData();
 		orderDto.setCustomer(customer);
 		
+		// 尋訪每一項 item, 並透過 Feign 取得實體資料
+		for(Item item : order.getItems()) {
+			ItemDto itemDto = convertToDto(item);
+			orderDto.getItemDtos().add(itemDto); // 加入到 itemDtos
+		}
 		return orderDto;
 	}
 	
