@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.demo.model.po.Product;
 
+@Repository
 public class ProductDao {
 	
 	// In-Memory
