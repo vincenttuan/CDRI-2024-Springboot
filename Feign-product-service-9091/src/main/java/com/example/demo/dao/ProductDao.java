@@ -84,6 +84,15 @@ public class ProductDao {
 		return false;
 	}
 	
+	// 刪除商品
+	public Boolean delete(Integer id) {
+		Optional<Product> productOpt = findById(id);
+		if(productOpt.isEmpty()) {
+			return false;
+		}
+		return products.remove(productOpt.get());
+	}
+	
 }
 
 
