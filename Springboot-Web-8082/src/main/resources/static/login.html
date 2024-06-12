@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="/perform_login" method="post">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+        <div>
+            <p id="error" style="color:red;" hidden>Invalid username or password.</p>
+            <p id="logout" style="color:green;" hidden>You have been logged out successfully.</p>
+        </div>
+    </form>
+    <script>
+        // 顯示錯誤或登出消息
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+            document.getElementById('error').hidden = false;
+        }
+        if (urlParams.has('logout')) {
+            document.getElementById('logout').hidden = false;
+        }
+    </script>
+</body>
+</html>
