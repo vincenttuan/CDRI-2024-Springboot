@@ -13,7 +13,8 @@ import feign.Feign;
 
 @Configuration
 @LoadBalancerClients({
-	@LoadBalancerClient(name = "service-c", configuration = RandomLoadBalancerConfig.class)
+	@LoadBalancerClient(name = "service-c")
+	//@LoadBalancerClient(name = "service-c", configuration = RandomLoadBalancerConfig.class)
 })
 public class LoadBalancerConfig {
 	
