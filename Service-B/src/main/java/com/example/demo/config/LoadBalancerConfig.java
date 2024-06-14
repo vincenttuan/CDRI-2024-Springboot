@@ -4,17 +4,19 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
 import org.springframework.cloud.loadbalancer.core.RandomLoadBalancer;
+import org.springframework.cloud.loadbalancer.core.ReactorLoadBalancer;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import feign.Feign;
 
 @Configuration
 @LoadBalancerClients({
-	@LoadBalancerClient(name = "service-c")
-	//@LoadBalancerClient(name = "service-c", configuration = RandomLoadBalancerConfig.class)
+	//@LoadBalancerClient(name = "service-c")
+	@LoadBalancerClient(name = "service-c", configuration = RandomLoadBalancerConfig.class)
 })
 public class LoadBalancerConfig {
 	
@@ -33,5 +35,4 @@ class RandomLoadBalancerConfig {
 		return Feign.builder();
 	}
 }
-
 
