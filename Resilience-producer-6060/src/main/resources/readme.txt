@@ -1,3 +1,16 @@
+課程名稱：
+使用 Resilience4j 增強 Spring Boot 應用的穩定性與容錯性
+
+課程介紹：
+在現代分佈式系統中，應用的穩定性與容錯性是至關重要的。Resilience4j 是一個專為 Java 設計的輕量級容錯庫，提供了斷路器（Circuit Breaker）、重試（Retry）、隔離（Bulkhead）等多種容錯機制。本課程將帶您一步步學習如何使用 Resilience4j 在 Spring Boot 應用中實現這些技術，從而提升應用的可靠性。
+
+課程目標：
+了解 Resilience4j 的基本概念和功能。
+學習如何在 Spring Boot 應用中配置和使用斷路器（Circuit Breaker）。
+學習如何在 Spring Boot 應用中配置和使用重試（Retry）。
+學習如何在 Spring Boot 應用中配置和使用隔離（Bulkhead），包括信號量和線程池兩種模式。
+掌握全局異常處理技術，統一處理應用中的異常情況。
+
 details": {
     "failureRate": "100.0%",
     "failureRateThreshold": "50.0%",
@@ -23,3 +36,4 @@ failedCalls: 5，表示有5次調用失敗。
 notPermittedCalls: 2，這表示有2次調用在斷路器開啟（或半開）狀態下被拒絕，沒有被執行。
 state: "OPEN"，斷路器的當前狀態是開啟（OPEN）。在開啟狀態下，所有的呼叫都將被自動拒絕，直到斷路器變為半開狀態，此時允許一部分調用通過以檢測系統是否已恢復正常。
 當斷路器處於開啟狀態時，它會阻止可能導致進一步失敗的呼叫，這有助於防止系統過載並允許底層服務恢復正常。
+
