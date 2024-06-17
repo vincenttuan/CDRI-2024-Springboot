@@ -19,24 +19,27 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Resilience4j 配置類，用於配置各種容錯機制如重試、限流、隔離和時間限制等。
+ */
 @Configuration
 public class Resilience4jConfig {
 
-//    @Bean
-//    public RetryRegistry retryRegistry() {
-//        RetryRegistry registry = RetryRegistry.ofDefaults();
-//        Retry retry = registry.retry("employeeRetry");
-//        retry.getEventPublisher().onRetry(event -> System.out.println("retry"));
-//        return registry;
-//    }
-    
-    
-	// maxAttempts(3): 表示在初始嘗試一次失敗後, 重試將進行二次, 所以總共是三次
-	@Bean
+    /**
+     * 配置重試機制 (Retry)
+     * 目的是確保服務在遇到臨時故障時能夠重試，從而提高服務的穩定性。
+     * 運作原理是設置最大嘗試次數和重試間隔時間，在指定次數內重試請求。
+     * 
+     * maxAttempts(3): 表示在初始嘗試一次失敗後，重試將進行兩次，所以總共是三次。
+     * waitDuration: 重試之間的等待時間為 500 毫秒。
+     * 
+     * @return RetryRegistry
+     */
+    @Bean
     public RetryRegistry retryRegistry() {
         RetryConfig config = RetryConfig.custom()
             .maxAttempts(3) // 包含初始嘗試失敗在內的總次數
-            .waitDuration(java.time.Duration.ofMillis(500))
+            .waitDuration(Duration.ofMillis(500))
             .build();
         
         RetryRegistry registry = RetryRegistry.of(config);
@@ -45,15 +48,22 @@ public class Resilience4jConfig {
         });
         return registry;
     }
-	
-	// 這樣配置之後，每次調用 getEmployee 方法時，最多允許 5 個並發調用。
-	// 如果超過這個數量，額外的調用將等待最多 2 秒。
-	// 如果超過這個等待時間，調用將失敗並觸發回退方法。
-	@Bean
+
+    /**
+     * 配置信號量隔離機制 (Bulkhead)
+     * 目的是限制同時執行的請求數量，防止過多的並發請求導致系統過載。
+     * 運作原理是設置最大並發請求數量和最大等待時間，超過限制的請求將被拒絕或等待。
+     * 
+     * maxConcurrentCalls(5): 每次調用 getEmployee 方法時，最多允許 5 個並發調用。
+     * maxWaitDuration: 如果超過這個數量，額外的調用將等待最多 2 秒。
+     * 
+     * @return BulkheadRegistry
+     */
+    @Bean
     public BulkheadRegistry bulkheadRegistry() {
         BulkheadConfig config = BulkheadConfig.custom()
             .maxConcurrentCalls(5)
-            .maxWaitDuration(java.time.Duration.ofSeconds(2))
+            .maxWaitDuration(Duration.ofSeconds(2))
             .build();
         
         BulkheadRegistry registry = BulkheadRegistry.of(config);
@@ -66,14 +76,18 @@ public class Resilience4jConfig {
         return registry;
     }
     
-	// 說明: 當使用 ThreadPoolBulkhead 時, 需要設置 ThreadPoolBulkheadConfig
-	// ThreadPoolBulkheadConfig: 表示線程池的配置信息
-	// maxThreadPoolSize(5): 表示線程池最大大小
-	// coreThreadPoolSize(5): 表示核心線程池大小
-	// queueCapacity(10): 表示等待佇列容量
-	// ThreadPoolBulkheadRegistry: 表示線程池的註冊表
-	// ThreadPoolBulkheadRegistry.of(config): 表示創建一個線程池的註冊表
-	@Bean
+    /**
+     * 配置線程池隔離機制 (ThreadPool Bulkhead)
+     * 目的是通過線程池來限制並發請求數量，防止單個服務的問題影響整個系統。
+     * 運作原理是設置線程池大小和佇列容量，超過限制的請求將被拒絕或排隊等待。
+     * 
+     * maxThreadPoolSize(5): 線程池最大大小。
+     * coreThreadPoolSize(5): 核心線程池大小。
+     * queueCapacity(10): 等待佇列容量。
+     * 
+     * @return ThreadPoolBulkheadRegistry
+     */
+    @Bean
     public ThreadPoolBulkheadRegistry threadPoolBulkheadRegistry() {
         ThreadPoolBulkheadConfig config = ThreadPoolBulkheadConfig.custom()
             .maxThreadPoolSize(5) // 線程池最大大小
@@ -90,10 +104,19 @@ public class Resilience4jConfig {
 
         return registry;
     }
-	
-	// 限流（Rate Limiter）
-	// 限流機制可以防止系統被過多的請求淹沒，從而保護後端服務。Resilience4j 提供了限流的支持，可以設置每秒允許的最大請求數量。
-	@Bean
+
+    /**
+     * 配置限流機制 (Rate Limiter)
+     * 目的是限制每秒允許的請求數量，防止系統被過多的請求淹沒。
+     * 運作原理是設置每秒允許的最大請求數量和超時時間，超過限制的請求將被拒絕。
+     * 
+     * limitRefreshPeriod: 設置限流的刷新週期為 1 秒。
+     * limitForPeriod: 設置每個週期內允許的最大請求數量為 10。
+     * timeoutDuration: 設置請求超時時間為 500 毫秒。
+     * 
+     * @return RateLimiterRegistry
+     */
+    @Bean
     public RateLimiterRegistry rateLimiterRegistry() {
         RateLimiterConfig config = RateLimiterConfig.custom()
             .limitRefreshPeriod(Duration.ofSeconds(1))
@@ -103,10 +126,17 @@ public class Resilience4jConfig {
         
         return RateLimiterRegistry.of(config);
     }
-	
-	// 時間限制（Time Limiter）
-	// 這個功能允許你設置方法執行的最大時間，超過這個時間將會拋出 TimeoutException。這對於確保系統不會因為某些請求長時間未響應而被拖垮非常有用。
-	@Bean
+
+    /**
+     * 配置時間限制機制 (Time Limiter)
+     * 目的是限制方法執行的最大時間，防止長時間未響應的請求拖垮系統。
+     * 運作原理是設置方法執行的最大時間，超過這個時間將拋出 TimeoutException。
+     * 
+     * timeoutDuration: 設置方法執行的最大時間為 2 秒。
+     * 
+     * @return TimeLimiterRegistry
+     */
+    @Bean
     public TimeLimiterRegistry timeLimiterRegistry() {
         TimeLimiterConfig config = TimeLimiterConfig.custom()
             .timeoutDuration(Duration.ofSeconds(2))
@@ -114,5 +144,4 @@ public class Resilience4jConfig {
         
         return TimeLimiterRegistry.of(config);
     }
-	
 }
