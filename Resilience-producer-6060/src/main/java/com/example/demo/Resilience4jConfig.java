@@ -4,10 +4,18 @@ import io.github.resilience4j.bulkhead.BulkheadConfig;
 import io.github.resilience4j.bulkhead.BulkheadRegistry;
 import io.github.resilience4j.bulkhead.ThreadPoolBulkheadConfig;
 import io.github.resilience4j.bulkhead.ThreadPoolBulkheadRegistry;
+import io.github.resilience4j.ratelimiter.RateLimiterConfig;
+import io.github.resilience4j.ratelimiter.RateLimiterRegistry;
 import io.github.resilience4j.retry.Retry;
 import io.github.resilience4j.retry.RetryConfig;
 import io.github.resilience4j.retry.RetryRegistry;
 import io.github.resilience4j.retry.event.RetryOnRetryEvent;
+import io.github.resilience4j.timelimiter.TimeLimiterConfig;
+import io.github.resilience4j.timelimiter.TimeLimiterRegistry;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -82,4 +90,29 @@ public class Resilience4jConfig {
 
         return registry;
     }
+	
+	// 限流（Rate Limiter）
+	// 限流機制可以防止系統被過多的請求淹沒，從而保護後端服務。Resilience4j 提供了限流的支持，可以設置每秒允許的最大請求數量。
+	@Bean
+    public RateLimiterRegistry rateLimiterRegistry() {
+        RateLimiterConfig config = RateLimiterConfig.custom()
+            .limitRefreshPeriod(Duration.ofSeconds(1))
+            .limitForPeriod(10)
+            .timeoutDuration(Duration.ofMillis(500))
+            .build();
+        
+        return RateLimiterRegistry.of(config);
+    }
+	
+	// 時間限制（Time Limiter）
+	// 這個功能允許你設置方法執行的最大時間，超過這個時間將會拋出 TimeoutException。這對於確保系統不會因為某些請求長時間未響應而被拖垮非常有用。
+	@Bean
+    public TimeLimiterRegistry timeLimiterRegistry() {
+        TimeLimiterConfig config = TimeLimiterConfig.custom()
+            .timeoutDuration(Duration.ofSeconds(2))
+            .build();
+        
+        return TimeLimiterRegistry.of(config);
+    }
+	
 }

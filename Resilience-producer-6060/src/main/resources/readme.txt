@@ -9,6 +9,8 @@
 學習如何在 Spring Boot 應用中配置和使用斷路器（Circuit Breaker）。
 學習如何在 Spring Boot 應用中配置和使用重試（Retry）。
 學習如何在 Spring Boot 應用中配置和使用隔離（Bulkhead），包括信號量和線程池兩種模式。
+學習如何在 Spring Boot 應用中配置和使用限流（Rate Limiter）。
+學習如何在 Spring Boot 應用中配置和使用時間限制（Time Limiter）。
 掌握全局異常處理技術，統一處理應用中的異常情況。
 
 details": {

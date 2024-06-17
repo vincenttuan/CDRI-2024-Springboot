@@ -18,9 +18,9 @@ import io.github.resilience4j.retry.annotation.Retry;
 public class EmployeeController {
 	
 	//@CircuitBreaker(name = "employeeCircuitBreaker", fallbackMethod = "getEmployeeFallback")
-	//@Retry(name = "employeeRetry", fallbackMethod = "getEmployeeFallback")
+	@Retry(name = "employeeRetry", fallbackMethod = "getEmployeeFallback")
 	// Bulkhead.Type.SEMAPHORE 表示使用信號量來控制並發數量
-	//@Bulkhead(name = "employeeBulkhead", type = Bulkhead.Type.SEMAPHORE)
+	@Bulkhead(name = "employeeBulkhead", type = Bulkhead.Type.SEMAPHORE)
 	@GetMapping("/semaphone/{empId}")
 	public Employee getEmployee(@PathVariable Integer empId) throws InterruptedException {
         
