@@ -24,3 +24,23 @@ spring-cloud-starter-gateway:
                    +--------------+     +---------------+
 
 ---------------------------------------------------------------------------------
+沒有 Gateway
+client 端要自行記住每一個為服務的 ip 與 port, 例如:
+http://10.1.1.2:9091/products/1
+http://10.5.5.2:9092/customers/1
+http://10.8.7.5:9093/orders/1
+
+有 Gateway
+client 端不用記住每一個為服務的 ip 與 port
+只要知道 gateway 的位置(localhost)即可, 例如:
+http://localhost/products/1
+http://localhost/customers/1
+http://localhost/orders/1
+
+
+
+
+
+
+
+
