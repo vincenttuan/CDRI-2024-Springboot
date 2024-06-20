@@ -7,10 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.example.demo.model.ErrorResponse;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @ControllerAdvice // 處理全域服務
 public class GlobalExceptionHandler {
 	
