@@ -51,6 +51,18 @@ public class ResilienceConfig {
      * @return BulkheadRegistry
      */
 	
+	
+    /**
+     * 配置線程池隔離機制 (ThreadPool Bulkhead)
+     * 目的是通過線程池來限制並發請求數量，防止單個服務的問題影響整個系統。
+     * 運作原理是設置線程池大小和佇列容量，超過限制的請求將被拒絕或排隊等待。
+     * 
+     * maxThreadPoolSize(5): 線程池最大大小。
+     * coreThreadPoolSize(5): 核心線程池大小。
+     * queueCapacity(10): 等待佇列容量。
+     * 
+     * @return ThreadPoolBulkheadRegistry
+     */
 }
 
 
