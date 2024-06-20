@@ -49,6 +49,9 @@ public class EmployeeController {
 		return emp;
 	}
 	
+	// Retry
+	
+	
 	// 這是一個回退方法(Fallback), 當 getEmployee 方法發生異常將調用此方法
 	public Employee getEmployeeFallback(Integer empId, Throwable t) {
 		Employee emp = new Employee();
