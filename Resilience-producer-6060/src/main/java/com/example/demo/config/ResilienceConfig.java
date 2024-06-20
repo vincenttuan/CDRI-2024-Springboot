@@ -39,6 +39,18 @@ public class ResilienceConfig {
 		
 		return registry;
 	}
+	
+    /**
+     * 配置信號量隔離機制 (Bulkhead)
+     * 目的是限制同時執行的請求數量，防止過多的並發請求導致系統過載。
+     * 運作原理是設置最大並發請求數量和最大等待時間，超過限制的請求將被拒絕或等待。
+     * 
+     * maxConcurrentCalls(5): 每次調用 getEmployee 方法時，最多允許 5 個並發調用。
+     * maxWaitDuration: 如果超過這個數量，額外的調用將等待最多 2 秒。
+     * 
+     * @return BulkheadRegistry
+     */
+	
 }
 
 
