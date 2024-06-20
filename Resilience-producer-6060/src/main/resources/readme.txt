@@ -2,7 +2,9 @@
 使用 Resilience4j 增強 Spring Boot 應用的穩定性與容錯性
 
 課程介紹：
-在現代分佈式系統中，應用的穩定性與容錯性是至關重要的。Resilience4j 是一個專為 Java 設計的輕量級容錯庫，提供了斷路器（Circuit Breaker）、重試（Retry）、隔離（Bulkhead）等多種容錯機制。本課程將帶您一步步學習如何使用 Resilience4j 在 Spring Boot 應用中實現這些技術，從而提升應用的可靠性。
+在現代分佈式系統中，應用的穩定性與容錯性是至關重要的。
+Resilience4j 是一個專為 Java 設計的輕量級容錯庫，提供了斷路器（Circuit Breaker）、重試（Retry）、隔離（Bulkhead）等多種容錯機制。
+本課程將帶您一步步學習如何使用 Resilience4j 在 Spring Boot 應用中實現這些技術，從而提升應用的可靠性。
 
 課程目標：
 了解 Resilience4j 的基本概念和功能。
