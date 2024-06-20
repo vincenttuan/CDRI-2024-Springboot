@@ -27,7 +27,7 @@ public class ResilienceConfig {
 	@Bean
 	public RetryRegistry retryRegistry() {
 		RetryConfig config = RetryConfig.custom()
-				.maxAttempts(3)
+				.maxAttempts(3) // 表示在初始嘗試一次失敗後，重試將進行兩次，所以總共是三次。
 				.waitDuration(Duration.ofMillis(500))
 				.build();
 		RetryRegistry registry = RetryRegistry.of(config);
