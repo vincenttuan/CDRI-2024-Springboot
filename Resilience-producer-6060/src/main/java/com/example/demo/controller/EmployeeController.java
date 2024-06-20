@@ -31,8 +31,12 @@ public class EmployeeController {
 	@CircuitBreaker(name = "employeeCircuitBreaker", fallbackMethod = "getEmployeeFallback")
 	@GetMapping("/breaker/{empId}")
 	public Employee getEmployee2(@PathVariable Integer empId) {
+		// empId 不正確
+		if(empId <= 0) {
+			throw new RuntimeException("員工編號不正確, 無此員工");
+		}
 		
-		// 假設 emp >= 10 都會發生異常
+		// 假設 empId >= 10 都會發生異常
 		if(empId >= 10) {
 			throw new RuntimeException("資料庫或網路繁忙");
 		}
@@ -47,9 +51,6 @@ public class EmployeeController {
 	
 	// 這是一個回退方法(Fallback), 當 getEmployee 方法發生異常將調用此方法
 	public Employee getEmployeeFallback(Integer empId, Throwable t) {
-		if(empId <= 0) {
-			throw new RuntimeException("員工編號不正確, 無此員工");
-		}
 		Employee emp = new Employee();
 		emp.setEmpId(empId);
 		emp.setEmpName("Fallback");
