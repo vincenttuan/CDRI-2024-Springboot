@@ -82,6 +82,7 @@ public class ResilienceConfig {
      * 
      * @return ThreadPoolBulkheadRegistry
      */
+	@Bean
 	public ThreadPoolBulkheadRegistry threadPoolBulkheadRegistry() {
 		ThreadPoolBulkheadConfig config = ThreadPoolBulkheadConfig.custom()
 				.maxThreadPoolSize(5)

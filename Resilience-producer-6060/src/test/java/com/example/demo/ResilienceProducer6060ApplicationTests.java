@@ -18,7 +18,8 @@ class ResilienceProducer6060ApplicationTests {
 		for (int i = 0; i < 200; i++) { // 發送200個並發請求
             new Thread(() -> {
                 try {
-                    URL url = new URL("http://localhost:6060/employee/threadpool/1");
+                	//URL url = new URL("http://localhost:6060/employee/semaphone/1");
+                	URL url = new URL("http://localhost:6060/employee/threadpool/1");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     int responseCode = conn.getResponseCode();
