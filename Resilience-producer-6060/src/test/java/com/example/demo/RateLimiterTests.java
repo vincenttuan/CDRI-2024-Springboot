@@ -31,9 +31,9 @@ class RateLimiterTests {
 		}
 		
 		// 第 11 次
-		System.out.printf("發送第 %d 次 => ", i);
+		System.err.printf("發送第 %d 次 => ", i);
 		String responseMessage = getEmployee();
-        System.out.println("Response Message: " + responseMessage);
+        System.err.println("Response Message: " + responseMessage);
         
         // 停 1 秒鐘
         System.out.println("停 1 秒鐘");
