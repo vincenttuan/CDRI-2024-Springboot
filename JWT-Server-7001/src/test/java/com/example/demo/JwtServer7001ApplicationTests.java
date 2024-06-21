@@ -40,6 +40,8 @@ class JwtServer7001ApplicationTests {
 
 	    // 從響應中提取 JWT
 	    String jwt = response.getBody();
-	    System.out.println(jwt);
+	    System.out.println("username: " + username);
+	    System.out.println("password: " + password);
+	    System.out.println("JWT Token: " + jwt);
 	}
 }
