@@ -65,6 +65,10 @@ public class BookingService {
 	public static void main(String[] args) throws InterruptedException {
 		System.out.println("開始預訂");
 		
+//		BookingService bookingService = new BookingService();
+//		bookingService.bookTrip();
+		
+		
 		new Thread(() -> {
 			BookingService bookingService = new BookingService();
 			Thread bookingThread = new Thread(() -> bookingService.bookTrip());
@@ -77,7 +81,7 @@ public class BookingService {
 		}).start();
 		
 		
-		System.out.println("做其他事情...");
+		System.out.println("做其他事情: 聽音樂");
 	}
 
 }
