@@ -8,12 +8,14 @@ public class BookingService {
 	// 模擬預定酒店的操作
 	public String bookHotel() throws InterruptedException {
 		Thread.sleep(2000); // 模擬耗時操作
+		System.out.println("酒店預定完成");
 		return "Hotel booked!";
 	}
 	
 	// 模擬預定航班的操作
 	public String bookFlight() throws InterruptedException {
 		Thread.sleep(3000); // 模擬耗時操作
+		System.out.println("航班預定完成");
 		return "Flight booked!";
 	}
 	
