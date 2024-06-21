@@ -12,9 +12,9 @@ public class BookingService {
 	}
 	
 	// 模擬預定航班的操作
-	public String bookFligth() throws InterruptedException {
+	public String bookFlight() throws InterruptedException {
 		Thread.sleep(3000); // 模擬耗時操作
-		return "Fligth booked!";
+		return "Flight booked!";
 	}
 	
 	// 依序預定酒店與航班
@@ -26,8 +26,8 @@ public class BookingService {
 		System.out.println(hotelBooking);
 		
 		// 預定航班
-		String fligthBooking = bookFligth();
-		System.out.println(fligthBooking);
+		String flightBooking = bookFlight();
+		System.out.println(flightBooking);
 		
 		long end = System.currentTimeMillis();
 		System.out.printf("Total time: %d ms%n", (end - start));
