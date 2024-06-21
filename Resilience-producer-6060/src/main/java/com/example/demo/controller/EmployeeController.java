@@ -154,7 +154,8 @@ public class EmployeeController {
 			
 			// 模擬業務處理遞延(超過 2000ms 就會發生 TimeLimiter's TimeoutException)
 			try {
-				Thread.sleep(1000);
+				//Thread.sleep(1000); // 在 2000ms 內沒問題
+				Thread.sleep(3000); // 超過 2000ms 會拋出 TimeoutException 例外
 			} catch (InterruptedException e) {
 				throw new RuntimeException("業務處理遞延處理失敗");
 			}
