@@ -1,6 +1,7 @@
 package com.case2;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 //開發一個服務來預訂酒店與航班
 //我們希望這二個任務可以並行
@@ -42,8 +43,21 @@ public class BookingService {
 		// 等待二個預定都操作完成
 		CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(hotelFuture, flightFuture);
 		
-		long end = System.currentTimeMillis();
-		System.out.printf("Total time: %d ms%n", (end - start));
+		// 當二個操作都完成後執行
+		combinedFuture.thenRun(() -> {
+			try {
+				System.out.println(hotelFuture.get()); // 獲取酒店預定結果
+				System.out.println(flightFuture.get()); // 獲取航班預定結果
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+			
+			long end = System.currentTimeMillis();
+			System.out.printf("Total time: %d ms%n", (end - start));
+			
+		}).join();
+		
+		
 	}
 	
 	public static void main(String[] args) {
