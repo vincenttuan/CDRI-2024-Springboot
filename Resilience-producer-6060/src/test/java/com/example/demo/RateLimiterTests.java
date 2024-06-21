@@ -33,6 +33,17 @@ class RateLimiterTests {
 		System.out.printf("發送第 %d 次 => ", i);
 		String responseMessage = getEmployee();
         System.out.println("Response Message: " + responseMessage);
+        
+        // 停 1 秒鐘
+        System.out.println("停 1 秒鐘");
+        Thread.sleep(1000);
+        
+        i++;
+        // 第 12 次
+        System.out.printf("發送第 %d 次 => ", i);
+		responseMessage = getEmployee();
+        System.out.println("Response Message: " + responseMessage);
+        
 	}
 	
 	private String getEmployee() throws Exception {
