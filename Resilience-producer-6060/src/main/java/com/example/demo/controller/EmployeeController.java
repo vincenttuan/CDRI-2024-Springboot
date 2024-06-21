@@ -137,7 +137,7 @@ public class EmployeeController {
 		
 	}
 	
-	// 利用 TimeLimiter 來處理錯誤
+	// 利用 TimeLimiter 來處理錯誤, 目的是限制方法執行的最大時間，防止長時間未響應的請求拖垮系統。
 	@GetMapping("/timelimiter/{empId}")
 	@TimeLimiter(name = "employeeTimeLimiter", fallbackMethod = "getEmployeeFallback")
 	public Employee getEmployee6(@PathVariable Integer empId) throws InterruptedException {
