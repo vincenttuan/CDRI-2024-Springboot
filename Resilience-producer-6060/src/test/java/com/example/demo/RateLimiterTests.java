@@ -36,8 +36,10 @@ class RateLimiterTests {
         System.err.println("Response Message: " + responseMessage);
         
         // 停 1 秒鐘
+        Thread.sleep(10);
         System.out.println("停 1 秒鐘");
         Thread.sleep(1000);
+        
         
         i++;
         // 第 12 次
