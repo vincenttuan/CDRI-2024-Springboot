@@ -71,13 +71,7 @@ public class BookingService {
 		
 		new Thread(() -> {
 			BookingService bookingService = new BookingService();
-			Thread bookingThread = new Thread(() -> bookingService.bookTrip());
-			bookingThread.start();
-			try {
-				bookingThread.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} // 等待 bookingThread 執行完畢
+			bookingService.bookTrip();
 		}).start();
 		
 		
