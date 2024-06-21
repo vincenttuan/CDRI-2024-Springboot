@@ -17,7 +17,7 @@ public class BookingService {
 		return "Fligth booked!";
 	}
 	
-	// 同步預定酒店與航班
+	// 依序預定酒店與航班
 	public void bookTrip() throws InterruptedException {
 		long start = System.currentTimeMillis();
 		
@@ -26,7 +26,7 @@ public class BookingService {
 		System.out.println(hotelBooking);
 		
 		// 預定航班
-		String fligthBooking = bookHotel();
+		String fligthBooking = bookFligth();
 		System.out.println(fligthBooking);
 		
 		long end = System.currentTimeMillis();
