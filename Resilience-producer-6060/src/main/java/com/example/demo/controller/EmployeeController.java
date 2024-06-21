@@ -152,9 +152,9 @@ public class EmployeeController {
 				throw new RuntimeException("資料庫或網路繁忙");
 			}
 			
-			// 模擬業務處理遞延
+			// 模擬業務處理遞延(超過 2000ms 就會發生 TimeLimiter's TimeoutException)
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				throw new RuntimeException("業務處理遞延處理失敗");
 			}
