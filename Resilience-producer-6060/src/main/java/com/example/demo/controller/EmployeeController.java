@@ -139,20 +139,34 @@ public class EmployeeController {
 	
 	// 利用 TimeLimiter 來處理錯誤, 目的是限制方法執行的最大時間，防止長時間未響應的請求拖垮系統。
 	@GetMapping("/timelimiter/{empId}")
-	@TimeLimiter(name = "employeeTimeLimiter", fallbackMethod = "getEmployeeFallback")
-	public Employee getEmployee6(@PathVariable Integer empId) throws InterruptedException {
-		if(empId <= 0) {
-			throw new RuntimeException("員工編號不正確, 無此員工");
-		}
+	@TimeLimiter(name = "employeeTimeLimiter", fallbackMethod = "getCompletableFutureEmployeeFallback")
+	public CompletableFuture<Employee> getEmployee6(@PathVariable Integer empId) {
+		return CompletableFuture.supplyAsync(() -> {
+			// empId 不正確
+			if(empId <= 0) {
+				throw new RuntimeException("員工編號不正確, 無此員工");
+			}
+			
+			// 假設 empId >= 10 都會發生異常
+			if(empId >= 10) {
+				throw new RuntimeException("資料庫或網路繁忙");
+			}
+			
+			// 模擬業務處理遞延
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				throw new RuntimeException("業務處理遞延處理失敗");
+			}
+			
+			Employee emp = new Employee();
+			emp.setEmpId(empId);
+			emp.setEmpName("John");
+			emp.setDescription("Manager");
+			emp.setSalary(15_0000);
+			return emp;
+		});
 		
-		Thread.sleep(3000);
-		
-		Employee emp = new Employee();
-		emp.setEmpId(empId);
-		emp.setEmpName("John");
-		emp.setDescription("Manager");
-		emp.setSalary(15_0000);
-		return emp;
 	}
 	
 	// 這是一個回退方法(Fallback), 當 getEmployee 方法發生異常將調用此方法
