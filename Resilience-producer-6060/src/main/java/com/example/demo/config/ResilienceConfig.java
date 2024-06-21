@@ -118,6 +118,28 @@ public class ResilienceConfig {
         
         return TimeLimiterRegistry.of(config);
     }
+    
+    /**
+     * 配置限流機制 (Rate Limiter)
+     * 目的是限制每秒允許的請求數量，防止系統被過多的請求淹沒。
+     * 運作原理是設置每秒允許的最大請求數量和超時時間，超過限制的請求將被拒絕。
+     * 
+     * limitRefreshPeriod: 設置限流的刷新週期為 1 秒。
+     * limitForPeriod: 設置每個週期內允許的最大請求數量為 10。
+     * timeoutDuration: 設置請求超時時間為 500 毫秒。
+     * 
+     * @return RateLimiterRegistry
+     */
+    @Bean
+    public RateLimiterRegistry rateLimiterRegistry() {
+        RateLimiterConfig config = RateLimiterConfig.custom()
+            .limitRefreshPeriod(Duration.ofSeconds(1))
+            .limitForPeriod(10)
+            .timeoutDuration(Duration.ofMillis(500))
+            .build();
+        
+        return RateLimiterRegistry.of(config);
+    }
 	
 }
 
