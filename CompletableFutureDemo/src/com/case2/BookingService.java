@@ -2,6 +2,8 @@ package com.case2;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 //開發一個服務來預訂酒店與航班
 //我們希望這二個任務可以並行
@@ -65,17 +67,25 @@ public class BookingService {
 	public static void main(String[] args) throws InterruptedException {
 		System.out.println("開始預訂");
 		
+		
 //		BookingService bookingService = new BookingService();
 //		bookingService.bookTrip();
 		
+//		new Thread(() -> {
+//			BookingService bookingService = new BookingService();
+//			bookingService.bookTrip();
+//		}).start();
 		
-		new Thread(() -> {
+		ExecutorService executorService = Executors.newSingleThreadExecutor(); // 啟動執行服務
+		executorService.submit(() -> { // 執行服務
 			BookingService bookingService = new BookingService();
 			bookingService.bookTrip();
-		}).start();
+		});
+		executorService.shutdown();  // 關閉服務
 		
 		
 		System.out.println("做其他事情: 聽音樂");
+		
 	}
 
 }
