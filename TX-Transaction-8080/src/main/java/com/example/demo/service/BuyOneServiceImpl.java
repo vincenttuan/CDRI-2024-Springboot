@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.BookDao;
 
@@ -11,6 +13,7 @@ public class BuyOneServiceImpl implements BookOneService {
 	@Autowired
 	private BookDao bookDao;
 	
+	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public void buyOne(String username, Integer bookId) {
 		// 1. 查詢價格
