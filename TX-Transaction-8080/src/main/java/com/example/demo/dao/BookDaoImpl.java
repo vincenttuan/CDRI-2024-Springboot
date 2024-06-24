@@ -12,14 +12,14 @@ public class BookDaoImpl implements BookDao {
 	
 	@Override
 	public Integer getBookPrice(Integer bookId) {
-		String sql = "select book_price, from book where book_id=?";
+		String sql = "select book_price from book where book_id=?";
 		return jdbcTemplate.queryForObject(sql, Integer.class, bookId);
 	}
 
 	@Override
 	public Integer getBookStock(Integer bookId) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select book_amount from stock where book_id=?";
+		return jdbcTemplate.queryForObject(sql, Integer.class, bookId);
 	}
 
 	@Override
