@@ -17,6 +17,7 @@ public class BookController {
 	private BookOneService bookOneService;
 	
 	// 買單本書
+	// Ex: http://localhost:8080/book/one?username=john&bookId=1
 	@GetMapping("/one")
 	public String buyOneBook(@RequestParam("username") String username, @RequestParam("bookId") Integer bookId) {
 		bookOneService.buyOne(username, bookId);
