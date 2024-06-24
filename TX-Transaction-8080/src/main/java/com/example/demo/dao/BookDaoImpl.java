@@ -24,20 +24,32 @@ public class BookDaoImpl implements BookDao {
 
 	@Override
 	public Integer getWalletBalance(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select balance from wallet where username=?";
+		return jdbcTemplate.queryForObject(sql, Integer.class, username);
 	}
 
 	@Override
 	public Integer reduceBookStock(Integer bookId, Integer amountToReduce) {
-		// TODO Auto-generated method stub
-		return null;
+		// 1. 檢查庫存是否足夠
+		Integer bookAmount = getBookStock(bookId);
+		if(bookAmount < amountToReduce) { // 庫存不足
+			throw new RuntimeException(String.format("book_id:%d 庫存不足 (%d < %d)%n", bookId, bookAmount, reduceBookStock(bookId, amountToReduce)));
+		}
+		// 2. 更新庫存
+		String sql = "update stock set book_amount = book_amount - ? where book_id=?";
+		return jdbcTemplate.update(sql, amountToReduce, bookId);
 	}
 
 	@Override
 	public Integer reduceWalletBalance(String username, Integer bookPrice) {
-		// TODO Auto-generated method stub
-		return null;
+		// 1. 檢查餘額
+		Integer balance = getWalletBalance(username);
+		if(balance < bookPrice) { // 餘額不足
+			throw new RuntimeException(String.format("username:%s 餘額不足 (%d < %d)%n", username, balance, bookPrice));
+		}
+		// 2. 更新餘額
+		String sql = "update wallet set balance = balance - ? where username = ?";
+		return jdbcTemplate.update(sql, bookPrice, username); 
 	}
 
 }
