@@ -33,7 +33,7 @@ public class BookDaoImpl implements BookDao {
 		// 1. 檢查庫存是否足夠
 		Integer bookAmount = getBookStock(bookId);
 		if(bookAmount < amountToReduce) { // 庫存不足
-			throw new RuntimeException(String.format("book_id:%d 庫存不足 (%d < %d)%n", bookId, bookAmount, reduceBookStock(bookId, amountToReduce)));
+			throw new RuntimeException(String.format("book_id:%d 庫存不足 (%d < %d)%n", bookId, bookAmount, amountToReduce));
 		}
 		// 2. 更新庫存
 		String sql = "update stock set book_amount = book_amount - ? where book_id=?";
