@@ -5,6 +5,10 @@ docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-ma
 
 
 # 安裝版啟動
+需先安裝 erlang
+https://www.erlang.org/downloads
+
+再裝 RabbitMQ Server
 https://www.rabbitmq.com/docs/install-windows
 
 啟動Web管理介面
