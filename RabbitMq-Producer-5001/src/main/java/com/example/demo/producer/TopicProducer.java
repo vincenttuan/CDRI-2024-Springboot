@@ -13,6 +13,11 @@ public class TopicProducer {
 	private RabbitTemplate rabbitTemplate;
 	
 	@GetMapping("/sendTopic")
+	// http://localhost:5001/sendTopic/key1.test
+	// http://localhost:5001/sendTopic/key1.demo
+	// http://localhost:5001/sendTopic/key2.foo.bar
+	// http://localhost:5001/sendTopic/key2.demo.name.lab
+	// http://localhost:5001/sendTopic/key2.report
 	public String sendTopic(@RequestParam String routingKey) {
 		String message = "Hello, Topic Exchange";
 		rabbitTemplate.convertAndSend("topic-exchange", routingKey, message);
