@@ -15,6 +15,7 @@ sendDirect -------> | topic-exchange  | --+
    +-> key:topic.key1.demo                +-> | topic-queue2 | --> receiveTopicQueue2 (consumer)
    +-> key:topic.key2.foo.bar                 +--------------+
    +-> key:topic.key2.demo.name.lab
+   +-> key:topic.key2.report
 */
 
 @Configuration
