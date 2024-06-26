@@ -12,3 +12,7 @@ rabbitmq-plugins enable rabbitmq_management
 
 啟動指令:
 rabbitmq-server start
+
+關閉指令:
+rabbitmqctl stop
+
