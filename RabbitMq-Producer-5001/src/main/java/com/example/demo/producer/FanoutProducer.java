@@ -21,14 +21,14 @@ public class FanoutProducer {
 		String data = "Hello Fanout Exchange: " + new Date();
 		
 		// 非持久化訊息
-		// rabbitTemplate.convertAndSend("fanout-exchange", "", data);
+		rabbitTemplate.convertAndSend("fanout-exchange", "", data);
 		
 		
 		// 持久化訊息
-		MessageProperties messageProperties = new MessageProperties();
-		messageProperties.setDeliveryMode(MessageDeliveryMode.PERSISTENT);
-		Message message = new Message(data.getBytes(), messageProperties);
-		rabbitTemplate.send("fanout-exchange", "", message);
+//		MessageProperties messageProperties = new MessageProperties();
+//		messageProperties.setDeliveryMode(MessageDeliveryMode.PERSISTENT);
+//		Message message = new Message(data.getBytes(), messageProperties);
+//		rabbitTemplate.send("fanout-exchange", "", message);
 		
 		return "Message: [ " + data + " ] send to Fanout Exchange";
 	}

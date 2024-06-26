@@ -26,12 +26,12 @@ public class FanoutExchangeConfig {
 	
 	@Bean
 	public Queue fanoutQueue1() {
-		return new Queue("fanout-queue1", true); // queue 支援持久化保存
+		return new Queue("fanout-queue1", true); // queue 是否支援持久化保存
 	}
 	
 	@Bean
 	public Queue fanoutQueue2() {
-		return new Queue("fanout-queue2", true); // queue 支援持久化保存
+		return new Queue("fanout-queue2", true); // queue 是否支援持久化保存
 	}
 	
 	@Bean
