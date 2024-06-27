@@ -38,6 +38,10 @@ chmod +x rabbitmqadmin
 <b>
 ./rabbitmqadmin publish exchange=amq.default routing_key=my_persistent_queue payload="Hello, World!" properties='{"delivery_mode":2}'
 </b>
+在 RabbitMQ 中使用 properties='{"delivery_mode":2}' 時，您正在設定消息的持久性屬性。delivery_mode 屬性有兩個常用值：
+1（非持久）：這表示消息在 RabbitMQ 重啟後不會被保存。
+2（持久）：指示 RabbitMQ 需要將消息儲存到硬碟上，這樣即使服務重啟，消息也不會丟失。
+   
 步驟 5: 驗證消息
 在不影響消息重新排入隊列的情況下檢查消息：
 <b>
