@@ -17,9 +17,9 @@
 
 步驟 1: 啟動 RabbitMQ 容器
 首先，我們需要啟動一個配置了持久化存儲的 RabbitMQ 容器。確保你已經在主機上準備好了映射目錄 c:/rabbitmq_data。
-<pre style="background-color: black; color: white; padding: 10px;"><code>
+<div style="background-color: black; color: white; padding: 10px;">
 docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v c:/rabbitmq_data:/var/lib/rabbitmq rabbitmq:3.13-management
-</code></pre>
+</div>
 步驟 2: 下載和安裝 rabbitmqadmin
 進入容器，安裝所需的工具，並下載 rabbitmqadmin 工具：
 
