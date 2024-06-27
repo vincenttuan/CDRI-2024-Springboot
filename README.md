@@ -11,6 +11,10 @@
  * 5. 這將生成一個應用程序專用密碼，複製此密碼。
 </pre>
 
+<font style="background-color: black; color: white; padding: 10px;">
+docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v c:/rabbitmq_data:/var/lib/rabbitmq rabbitmq:3.13-management
+</font>
+
 # RabbitMQ
 <pre>   
 一個完整的測試流程，以確保 RabbitMQ 容器在重啟後仍能保留消息。
