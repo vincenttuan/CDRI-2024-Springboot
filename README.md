@@ -53,6 +53,10 @@ chmod +x rabbitmqadmin
 ./rabbitmqadmin get queue=my_persistent_queue ackmode=ack_requeue_true
 </b>
 步驟 6: 重啟容器
+離開 rabbitmq 環境   
+<b>
+exit
+</b>
 重啟 RabbitMQ 容器以測試消息持久性：
 <b>
 docker restart rabbitmq
