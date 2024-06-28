@@ -64,6 +64,7 @@ docker restart rabbitmq
 步驟 7: 再次驗證消息
 容器重啟後，再次使用 rabbitmqadmin 檢查隊列中的消息，以確保它們在重啟後仍然存在：
 <b>
+docker exec -it rabbitmq bash   
 ./rabbitmqadmin get queue=my_persistent_queue ackmode=ack_requeue_true
 </b>
 </pre>
