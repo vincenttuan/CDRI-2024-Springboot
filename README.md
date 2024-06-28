@@ -20,11 +20,16 @@
 <b>
 docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v c:/rabbitmq_data:/var/lib/rabbitmq rabbitmq:3.13-management
 </b>
+或
+<b>
+docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management   
+</b>   
 步驟 2: 下載和安裝 rabbitmqadmin
 進入容器，安裝所需的工具，並下載 rabbitmqadmin 工具：
 <b>
 docker exec -it rabbitmq bash
-apt-get update && apt-get install -y curl
+apt-get update
+apt-get install -y curl
 curl -o rabbitmqadmin http://localhost:15672/cli/rabbitmqadmin
 chmod +x rabbitmqadmin
 </b>
